@@ -47,3 +47,9 @@ GEOInflow is the product display name of the Liekan MIT derivative of Umami, wit
 - Diagnose stale fixtures, expected asynchronous retries and test-infrastructure failures within the failing scenario. Keep unrelated test-infrastructure repairs separate from the feature. Preserve production safeguards, report real product failures and never manufacture passing evidence.
 - Documentation/instruction-only edits require a scoped diff and formatting review. Do not run application suites, rebuild containers or restart services for these edits.
 - Briefly report checks run or reused, checks intentionally omitted and any remaining material gaps. Claim a full release pass only after the required release checks complete.
+
+## Cursor Cloud specific instructions
+
+Cloud Agent machines use Node.js 22.23.4, pnpm 12.3.4, PostgreSQL 16, and Redis. The environment start script creates a private `.env` from `~/.config/geoinflow/dev-secrets.env`, applies migrations, and seeds “猎看官网（示例数据）” when that example is absent. Deletion and revision markers stay in place. Open the development interface at http://localhost:3302. A fresh database signs in as admin / liekan. PostgreSQL is at `127.0.0.1:5432` database `liekan`. Redis is at `redis://127.0.0.1:6379`. The log worker is `dist/liekan-worker.mjs` and the analytics worker is `dist/liekan-analytics-worker.mjs`.
+
+Packaged installation remains `scripts/liekan-deploy.sh`, which publishes the application on `127.0.0.1:3002` and PostgreSQL on port 15435. Keep that path, its database volume, and its credentials separate from this development database.
